@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The web site of starkodder</title>
+  </head>
+  <body>
+    <audio id="source" src="https://raw.githubusercontent.com/starkodder/radio/main/RADIO1.wav" autoplay controls ></audio>
+    <script>
+    var audioElement = document.getElementById("source");
+    var audioCtx = new AudioContext();
+    var analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 2048;
+    var source = audioCtx.createMediaElementSource(audioElement);
+    source.connect(analyser);
+    source.connect(audioCtx.destination);
+    var data = new Uint8Array(analyser.frequencyBinCount);
+    </script>
+  </body>
+</html>
