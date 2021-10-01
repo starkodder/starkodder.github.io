@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            // Original code by @griffpatch ( https://scratch.mit.edu/users/griffpatch/ )
+            var username = prompt('Username?'); // Replace with your username
+            var page = 1;
+            var followers = 0;
+            var users = [];
+            function load(e) {
+                $.get("https://scratch.mit.edu/users/" + username + "/followers/?page=1", loaded);
+            }
+            function loaded(data) {
+                var $dom = $(data);
+                var $users = $dom.find('span.title').children();
+                for (var i=0; i < $users.length; i++) {
+                    var user = $users[i].text.trim(); 
+                    users.push(user);
+                    followers ++;
+                }
+                page++;
+                if($dom.find('.pagination').length > 0){
+                  $('#status')[0].textContent = 'page ' + (page-1) + ' of ' + $dom.find('.page-current')[$dom.find('.page-current').length-1].childNodes[0].textContent;
+                  $('#percent')[0].style.width = ((page-1)/(parseInt($dom.find('.page-current')[$dom.find('.page-current').length-1].childNodes[0].textContent)))*100 + '%';
+                }else{
+                    $('#percent')[0].style.width = '100%';
+                }
+                $.get("https://scratch.mit.edu/users/" + username + "/followers/?page=" + page, loaded).fail(function() {$('button')[0].style.display = 'block';$('#status')[0].textContent = "Done! Loaded " + followers + ' followers and ' + (page-1) + ' pages!';});
+            }
+            
+            function download(filename, text){
+              var element = document.createElement('a');
+              element.style.display = "none";
+              element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+              element.setAttribute('download', filename);
+              document.body.appendChild(element);
+              element.click();
+              document.body.removeChild(element);
+            }
+            function spara() {
+              download('followers.txt', users.join('\n'));
+            }
+        </script>
+    </head>
+    <body onload="load(event);">
+        <p id="status"></p>
+        <div id="percent" style="width: 0%;height: 1em;background-color: green;position: relative;left: 0;transition: width 0.8s cubic-bezier(.47,0,.74,.71) 0s;"></div>
+        <button onclick='spara()' style='display: none;'>Download as .txt file</button>
+    </body>
+</html>
