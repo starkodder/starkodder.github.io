@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>The web site of starkodder</title>
+  </head>
+  <body>
+    <h1>Starkodder's Scratch Visualizer Generator</h1>
+
+<audio controls id="audioPlayer"></audio><br/><br/>
+Select an audio file: <input type="file" id="inputFile" accept="audio/*" /><br/>
+<br/>
+<progress id="progressBar" max="100" value="0"></progress>
+<p id="status"></p>
+
+Note: Keep this browser tab focused while it's running. Otherwise there will be a lot of missing data.
+<script src="VisualizerGen.js"></script>
+  </body>
+</html>
