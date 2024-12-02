@@ -1,4 +1,4 @@
-<model-viewer src="isak.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="poster.webp" shadow-intensity="1">
+<model-viewer src="isak2 (2).glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="poster.webp" shadow-intensity="1" min-camera-orbit="-493deg 83deg auto" max-camera-orbit="-414deg 83deg auto">
     <div class="progress-bar hide" slot="progress-bar">
         <div class="update-bar"></div>
     </div>
